@@ -42,6 +42,13 @@ add_compile_options(-march=native)
 
 add_subdirectory(src)
 
+add_executable(bbann_build bbann_build.cpp)
+add_executable(bbann_search bbann_search.cpp)
+target_link_libraries(bbann_build BBAnnLib2_s algo_s ivf_s aio TimeRecorder)
+target_link_libraries(bbann_search BBAnnLib2_s algo_s ivf_s aio TimeRecorder)
+# target_link_libraries(build_bbann BBAnn)
+# target_link_libraries(search_bbann BBAnn)
+
 # add_subdirectory(test)
 # add_subdirectory(scripts)
 

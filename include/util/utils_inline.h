@@ -146,6 +146,14 @@ inline Computer<T1, T2, R> select_computer(MetricType metric_type) {
   }
 }
 
+inline MetricType get_metric_type_by_name(const std::string& mt_name) {
+    if (mt_name == std::string("L2"))
+        return MetricType::L2;
+    if (mt_name == std::string("IP"))
+        return MetricType::IP;
+    return MetricType::None;
+}
+
 } // namespace util
 
 inline std::string getClusterRawDataFileName(std::string prefix,
