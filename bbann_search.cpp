@@ -20,7 +20,7 @@ void search(int topk, float radius, const bbann::BBAnnParameters para) {
     auto start = std::chrono::high_resolution_clock::now();
     auto rst = index.RangeSearchCpp(pquery, dim, nq, radius, para);
     double dur = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
-    float acc = bbann::util::range_search_recall(rst, para.groundTruthFilePath);
+    float acc = bbann::util::range_search_recall<uint32_t, DISTT>(rst, para.groundTruthFilePath);
     std::cout << dur << ", " << nq / dur << ", " << acc << std::endl;
   } else {
     // knn
