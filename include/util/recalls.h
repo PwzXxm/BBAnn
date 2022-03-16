@@ -147,6 +147,7 @@ float compute_range_search_recall_only(
   return (1 + precision) * recall / 2;
 }
 
+template<typename DISTT, typename IDT>
 float range_search_recall(
     std::tuple<std::vector<uint32_t>, std::vector<uint32_t>,
                std::vector<uint64_t>> &res,

@@ -18,9 +18,7 @@ void search(int topk, float radius, const bbann::BBAnnParameters para) {
 
   if (topk == -1) {
     auto start = std::chrono::high_resolution_clock::now();
-    std::tuple<std::vector<uint32_t>, std::vector<uint32_t>,
-               std::vector<uint64_t>>
-        rst = index.RangeSearchCpp(pquery, dim, nq, radius, para);
+    auto rst = index.RangeSearchCpp(pquery, dim, nq, radius, para);
     double dur = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
     float acc = bbann::util::range_search_recall(rst, para.groundTruthFilePath);
     std::cout << dur << ", " << nq / dur << ", " << acc << std::endl;
@@ -78,11 +76,11 @@ int main(int argc, char **argv) {
   // metric_type, true, false);
 
   if (argv[1] == std::string("float")) {
-    search<float, float>(topk, radius, para);
+    // search<float, float>(topk, radius, para);
   } else if (argv[1] == std::string("uint8")) {
     search<uint8_t, uint32_t>(topk, radius, para);
   } else if (argv[1] == std::string("int8")) {
-    search<int8_t, int32_t>(topk, radius, para);
+    // search<int8_t, int32_t>(topk, radius, para);
   }
 
   rc.ElapseFromBegin(" totally done.");
