@@ -3,6 +3,9 @@
 #include "util/recalls.h"
 #include "util/utils_inline.h"
 
+#include <chrono>
+#include <iostream>
+
 template <typename DATAT, typename DISTT>
 void search(int topk, float radius, const bbann::BBAnnParameters para) {
   bbann::BBAnnIndex2<DATAT, DISTT> index(para.metric);
@@ -14,10 +17,13 @@ void search(int topk, float radius, const bbann::BBAnnParameters para) {
   bbann::util::read_bin_file<DATAT>(para.queryPath, pquery, nq, dim);
 
   if (topk == -1) {
+    auto start = std::chrono::high_resolution_clock::now()
     std::tuple<std::vector<uint32_t>, std::vector<uint32_t>,
                std::vector<uint64_t>>
         rst = index.RangeSearchCpp(pquery, dim, nq, radius, para);
-    bbann::util::range_search_recall(rst, para.groundTruthFilePath);
+    double dur = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count();
+    float acc = bbann::util::range_search_recall(rst, para.groundTruthFilePath);
+    std::cout << dur << ", " << nq / dur << ", " << acc << std::endl;
   } else {
     // knn
   }
