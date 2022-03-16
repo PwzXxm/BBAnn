@@ -17,7 +17,7 @@ void search(int topk, float radius, const bbann::BBAnnParameters para) {
   bbann::util::read_bin_file<DATAT>(para.queryPath, pquery, nq, dim);
 
   if (topk == -1) {
-    auto start = std::chrono::high_resolution_clock::now()
+    auto start = std::chrono::high_resolution_clock::now();
     std::tuple<std::vector<uint32_t>, std::vector<uint32_t>,
                std::vector<uint64_t>>
         rst = index.RangeSearchCpp(pquery, dim, nq, radius, para);
