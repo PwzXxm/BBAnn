@@ -33,7 +33,6 @@ int main(int argc, char **argv) {
     std::cout << "Usage: << " << argv[0] << " data_type(float or uint8 or int8)"
               << " index path"
               << " query data file"
-              << " answer file"
               << " ground truth file"
               << " nprobe"
               << " hnsw ef"
@@ -57,19 +56,18 @@ int main(int argc, char **argv) {
     index_path += '/';
   para.indexPrefixPath = index_path;
   para.queryPath = std::string(argv[3]);
-  std::string answerFilePath(argv[4]);
-  para.groundTruthFilePath = std::string(argv[5]);
-  para.nProbe = std::stoi(argv[6]);
-  para.efSearch = std::stoi(argv[7]);
-  int topk = std::stoi(argv[8]); // -1 indicates range search
-  para.K1 = std::stoi(argv[9]);
-  para.metric = bbann::util::get_metric_type_by_name(std::string(argv[10]));
-  para.blockSize = std::stoul(argv[11]) * PAGESIZE;
-  para.vector_use_sq = std::stoi(argv[12]) == 0 ? false : true;
-  para.use_hnsw_sq = std::stoi(argv[13]) == 0 ? false : true;
-  float radius = std::stof(argv[14]);
-  para.radiusFactor = std::stof(argv[15]);
-  para.rangeSearchProbeCount = std::stoi(argv[16]);
+  para.groundTruthFilePath = std::string(argv[4]);
+  para.nProbe = std::stoi(argv[5]);
+  para.efSearch = std::stoi(argv[6]);
+  int topk = std::stoi(argv[7]); // -1 indicates range search
+  para.K1 = std::stoi(argv[8]);
+  para.metric = bbann::util::get_metric_type_by_name(std::string(argv[9]));
+  para.blockSize = std::stoul(argv[10]) * PAGESIZE;
+  para.vector_use_sq = std::stoi(argv[11]) == 0 ? false : true;
+  para.use_hnsw_sq = std::stoi(argv[12]) == 0 ? false : true;
+  float radius = std::stof(argv[13]);
+  para.radiusFactor = std::stof(argv[14]);
+  para.rangeSearchProbeCount = std::stoi(argv[15]);
 
   // index.BatchSearchCpp(pquery, dim, numQuery, topk, para, answer_ids,
   // answer_dists); recall<float, uint32_t>(ground_truth_file, answer_file,
