@@ -29,8 +29,7 @@ read_gt_file(const std::string gt_file) {
     lims[i] += lims[i - 1];
   }
 
-  int32_t acc_res = std::accumulate(lims.begin(), lims.end(), 0);
-  assert(acc_res == total_res);
+  assert(lims.back() == total_res);
 
   for (size_t i = 0; i < total_res; ++i) {
     reader.read((char *)&ids[i], sizeof(int32_t));
