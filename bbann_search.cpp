@@ -62,11 +62,11 @@ int main(int argc, char **argv) {
   int topk = std::stoi(argv[7]); // -1 indicates range search
   para.K1 = std::stoi(argv[8]);
   para.metric = bbann::util::get_metric_type_by_name(std::string(argv[9]));
-  para.blockSize = std::stoul(argv[10]) * PAGESIZE;
+  para.blockSize = std::stoi(argv[10]) * PAGESIZE;
   para.vector_use_sq = std::stoi(argv[11]) == 0 ? false : true;
   para.use_hnsw_sq = std::stoi(argv[12]) == 0 ? false : true;
-  float radius = std::stof(argv[13]);
-  para.radiusFactor = std::stof(argv[14]);
+  double radius = std::stod(argv[13]);
+  para.radiusFactor = std::stod(argv[14]);
   para.rangeSearchProbeCount = std::stoi(argv[15]);
 
   // index.BatchSearchCpp(pquery, dim, numQuery, topk, para, answer_ids,
